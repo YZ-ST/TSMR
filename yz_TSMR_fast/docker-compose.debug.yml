@@ -1,0 +1,8 @@
+version: '3.8'                          # 版本信息指定使用 Docker Compose 的配置文件版本为 3.8(目前3.8為最新版本)
+
+services: 
+  fast-api:                             # 服務名稱
+    volumes:
+      # 若dockerfile 有用copy的方式把外部的資料夾複製到容器內時，一定都要一一volumes出來。(EX: 若./modules:/app/modules沒寫的話，則會被./fast-api:/app 給覆蓋掉!!!)
+      - ./fast-api:/app              # 將當前fast-api的資料夾給映射(mount)進去到容器，當fast-api的資料夾的任一內容有更動時，內部的/app也會一至性更動，不用重build (將當前目錄下的fast-api資料夾複製到容器的/app資料夾)
+      - ./modules:/app/modules       # 將 modules 資料夾 映射(mount)到容器的 /app/modules

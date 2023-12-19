@@ -1,0 +1,47 @@
+{
+    // 路徑在工作區中指向 .vscode/tasks.json 檔案
+    // 在工作區內的 .vscode 資料夾中建立這個檔案
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "docker-compose-fast-api",  // 任務的標籤，顯示在執行任務時的選擇列表中
+        "type": "docker-compose",  // 使用 docker-compose 類型的任務
+        "dockerCompose": {
+          "up": {
+            "detached": true,  // 在背景運行容器
+            "build": true  // 在運行之前先建構容器
+          }, 
+          "envFile": "${workspaceFolder}/config/local.env",  // 啟動docker-compose時使用的環境變數
+          "files": [
+            "${workspaceFolder}/docker-compose.yml",  // 指定要使用的 Compose 檔案
+            "${workspaceFolder}/docker-compose.debug.yml"  // 指定要使用的 Compose 檔案
+          ]
+        },
+        "problemMatcher": [],  // 問題匹配器，這裡設置為空
+        "group": {
+          "kind": "build",  // 任務分組為建構（build）
+          "isDefault": true  // 此任務是否是預設建構任務
+        }
+      },
+      {
+        "label": "docker-compose-middleware.yml",  // 任務的標籤，顯示在執行任務時的選擇列表中
+        "type": "docker-compose",  // 使用 docker-compose 類型的任務
+        "dockerCompose": {
+          "up": {
+            "detached": true,  // 在背景運行容器
+            "build": true  // 在運行之前先建構容器
+          }, 
+          // "envFile": "${workspaceFolder}/config/default.env",  // 啟動docker-compose時使用的環境變數
+          "files": [
+            "${workspaceFolder}/middleware/docker-compose-middleware.yml"  // 指定要使用的 Compose 檔案
+          ]
+        },
+        "problemMatcher": [],  // 問題匹配器，這裡設置為空
+        "group": {
+          "kind": "build",  // 任務分組為建構（build）
+          "isDefault": true  // 此任務是否是預設建構任務
+        }
+      },
+    ]
+  }
+  
